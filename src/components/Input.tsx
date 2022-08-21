@@ -12,6 +12,7 @@ interface Props{
     password?   : boolean;
     noAutoCap?  : boolean;
     type?       : 'default' | 'email-address' | 'number-pad'
+    msgError?   : string;
     onChange    : ( valor: string ) => void;
 }
 
@@ -23,6 +24,7 @@ export const Input = ( {
     icon,
     type= 'default', 
     password = false,
+    msgError = '',
     noAutoCap = false }: Props ) => {
 
     const [viewPassword, setViewPassword] = useState(false)
@@ -50,7 +52,7 @@ export const Input = ( {
                                     secureTextEntry={ !viewPassword }
                                     textContentType='password'
                                     keyboardType={!viewPassword ? 'default': 'visible-password'}
-                                    underlineColorAndroid='white'
+                                    underlineColorAndroid={msgError ? 'red' : 'white'}
                                     selectionColor={ colors.secondary }
                                     autoCorrect={ false }
                                     autoComplete='off'
@@ -83,7 +85,7 @@ export const Input = ( {
                                 placeholder={ placeholder }
                                 placeholderTextColor={ colors.light+'60' }
                                 keyboardType={ type }
-                                underlineColorAndroid='white'
+                                underlineColorAndroid={msgError ? 'red' : 'white'}
                                 selectionColor={ colors.secondary }
                                 autoCapitalize = { noAutoCap ? 'none' : 'words' }
                                 style={[ localStyles.input, (icon !== undefined) && localStyles.paddingIcon ] }
@@ -92,6 +94,9 @@ export const Input = ( {
                             />
                         )
                 }
+               {
+                    msgError && <Text style={ localStyles.error }>{ msgError }</Text>
+               } 
             </View>
             
         </View>
@@ -107,5 +112,11 @@ const localStyles = StyleSheet.create({
     },
     paddingIcon: {
         paddingLeft: 40,
+    },
+    error:{
+        position:'absolute',
+        color: 'red',
+        right: 10,
+        bottom: -10
     }
 });

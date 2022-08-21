@@ -53,9 +53,6 @@ export const AuthProvider = ( { children }: { children: JSX.Element | JSX.Elemen
         } catch (error) {
             dispatch({ type: "authenticatedFail" });
         }
-
-        
-
         
     }
 
@@ -77,13 +74,18 @@ export const AuthProvider = ( { children }: { children: JSX.Element | JSX.Elemen
             
             await AsyncStorage.setItem('token', data.token)
 
-        } catch ( err: any ) {
+        } catch( err: any ) {
+            if (err.message === 'Network Error' ){
+                return dispatch({
+                            type: "addError",
+                            payload: 'Verifique su conexión a internet'
+                        });
+            }
             dispatch({
                 type: "addError",
-                payload: (err.message === 'Network Error') 
-                    ? 'Verifique su conexión a internet'
-                    : 'Los datos proporcionados no son correctos'
+                payload: err.response?.data?.errors[0]?.msg || 'Los datos proporcionados no son correctos'
             })
+            
         }
     };
     const signIn = async ( loginData : LoginData ) => {
@@ -101,11 +103,15 @@ export const AuthProvider = ( { children }: { children: JSX.Element | JSX.Elemen
             await AsyncStorage.setItem('token', data.token)
 
         } catch ( err: any ) {
+            if (err.message === 'Network Error' ){
+                return dispatch({
+                            type: "addError",
+                            payload: 'Verifique su conexión a internet'
+                        });
+            }
             dispatch({
                 type: "addError",
-                payload: (err.message === 'Network Error') 
-                    ? 'Verifique su conexión a internet'
-                    : 'Los datos proporcionados no son correctos'
+                payload: err.response?.data?.msg || 'Credenciales Incorrectas'
             })
 
         }

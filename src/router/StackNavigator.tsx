@@ -1,11 +1,11 @@
 import React, { useContext, useEffect } from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 
-import { RegisterScreen } from '../screens/RegisterScreen';
-import { LoginScreen } from '../screens/LoginScreen';
-import { HomeScreen } from '../screens/HomeScreen';
-import { AuthContext } from '../context/AuthContext';
-import { LoadingModal } from '../components/LoadingModal';
+import { RegisterScreen }    from '../screens/RegisterScreen';
+import { LoginScreen }       from '../screens/LoginScreen';
+import { ProductsNavigator } from './ProductsNavigator';
+import { AuthContext }       from '../context/AuthContext';
+import { LoadingModal }      from '../components/LoadingModal';
 
 const Stack = createStackNavigator();
 
@@ -17,7 +17,6 @@ export const  StackNavigator = () => {
     
 
     const { status, errorMessage } = useContext( AuthContext )
-    console.log(status)
 
     if ( status === 'checking' ){
         return <LoadingModal background />
@@ -35,7 +34,7 @@ export const  StackNavigator = () => {
             >
                 {
                     status === 'authenticated'
-                        ? <Stack.Screen name="HomeScreen" component={HomeScreen} />
+                        ? <Stack.Screen name="ProductsNavigator" component={ProductsNavigator} />
                         : (
                             <>
                                 <Stack.Screen name="LoginScreen" component={LoginScreen} />

@@ -32,6 +32,10 @@
     ```
         npm i @react-native-async-storage/async-storage
     ```
+- ### React-native-picker: [Ver guía de instalación](https://www.npmjs.com/package/@react-native-picker/picker).
+    ```
+        npm i @react-native-picker/picker
+    ```
 - ### Image colors: [Ver guía de instalación](https://www.npmjs.com/package/react-native-image-colors).
     ```
         npm i react-native-image-colors

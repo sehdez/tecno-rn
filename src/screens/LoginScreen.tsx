@@ -20,10 +20,11 @@ export const LoginScreen = ({ navigation }: Props ) => {
     const { errorMessage, signIn, removeError  } = useContext( AuthContext );
 
     
-    const { correo, password, onChange } = useForm({
-        correo: 'test1@test.com',
-        password: '123456'
+    const { correo, password, onChange, form } = useForm({
+        correo: '',
+        password: '123456',
     })
+    
 
     useEffect( () => {
         if (errorMessage.length === 0) return
@@ -37,6 +38,7 @@ export const LoginScreen = ({ navigation }: Props ) => {
     }, [ errorMessage ])
 
     const onLogin = async () => {
+        
         setLoading(true);
         await signIn({correo, password});
         Keyboard.dismiss();
@@ -57,8 +59,9 @@ export const LoginScreen = ({ navigation }: Props ) => {
                         label='Correo electrónico' 
                         placeholder='Ejemplo: maria@gmail.com' 
                         noAutoCap
-                        onChange={( value ) => onChange( value, 'correo' )} 
+                        onChange={ ( value ) => onChange( value, 'correo' ) }
                         icon='mail-outline'
+                        type='email-address'
                         value={correo}
                     />
                     <View style={{ height:30 }} ></View>
