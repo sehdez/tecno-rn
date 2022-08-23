@@ -40,3 +40,7 @@
     ```
         npm i react-native-image-colors
     ```
+- ### React-native-image-picker: [Ver guía de instalación](https://www.npmjs.com/package/react-native-image-picker).
+    ```
+        npm i react-native-image-picker
+    ```

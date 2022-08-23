@@ -21,7 +21,7 @@ export const LoginScreen = ({ navigation }: Props ) => {
 
     
     const { correo, password, onChange, form } = useForm({
-        correo: '',
+        correo: 'test1@test.com',
         password: '123456',
     })
     
